@@ -1,0 +1,532 @@
+# Useful list of commands for Linux and Windows and Python packages
+
+Just a bunch of commands stacked together to easily find it.  
+Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
+
+## Table of content
+
+- [Useful list of commands for Linux and Windows and Python packages](#useful-list-of-commands-for-linux-and-windows-and-python-packages)
+  - [Table of content](#table-of-content)
+  - [SSH related commands](#ssh-related-commands)
+    - [Connect to a remote host](#connect-to-a-remote-host)
+    - [Send file to remote host](#send-file-to-remote-host)
+    - [Receive a file from remote host](#receive-a-file-from-remote-host)
+    - [ImageMagick](#imagemagick)
+      - [Remove alpha channel](#remove-alpha-channel)
+      - [Resize an image](#resize-an-image)
+      - [Batch](#batch)
+  - [Linux](#linux)
+    - [Extract file](#extract-file)
+      - [Extract tar.gz](#extract-targz)
+      - [Extract tar.xz](#extract-tarxz)
+      - [Extract .zip](#extract-zip)
+    - [Compress files](#compress-files)
+      - [Zip files and folders](#zip-files-and-folders)
+    - [Pandoc like a boss](#pandoc-like-a-boss)
+  - [Python](#python)
+    - [Convert images to PDF](#convert-images-to-pdf)
+    - [Lists](#lists)
+      - [List comprehension](#list-comprehension)
+      - [Extend a list](#extend-a-list)
+    - [Dictionaries](#dictionaries)
+      - [Check if a key is in a dict](#check-if-a-key-is-in-a-dict)
+    - [Tabulate](#tabulate)
+    - [Pandas](#pandas)
+      - [Filter values](#filter-values)
+      - [Select by [row, col] index](#select-by-row-col-index)
+      - [Print interesting data](#print-interesting-data)
+      - [Append a dataframe to another dataframe](#append-a-dataframe-to-another-dataframe)
+    - [Format float](#format-float)
+    - [JSON file operations](#json-file-operations)
+      - [Save to JSON file](#save-to-json-file)
+      - [Load from JSON file](#load-from-json-file)
+      - [Append data to JSON](#append-data-to-json)
+    - [Matplotlib](#matplotlib)
+      - [Setting numbers on the axis](#setting-numbers-on-the-axis)
+      - [Linewidth](#linewidth)
+      - [Remove top and right axis](#remove-top-and-right-axis)
+    - [Date and time](#date-and-time)
+      - [Get a list of months](#get-a-list-of-months)
+
+## SSH related commands
+
+Work for both windows and linux, if you have OpenSSH.
+
+### Connect to a remote host
+
+The most basic one. Be aware that `server_ip` can be a domain (e.g.: `example.org`) or an ip (e.g.: `192.168.69.42`).
+
+```bash
+ssh user_name@server_ip
+```
+
+If you use the fancy shit like a SSH public key authentication, use the `-i` argument and provide the path to the public key file (e.g.: `/home/user_name/.ssh/my_key.pub` or `~/.ssh/my_key.pub`), just remember that is not always that the key will have the `.pub` extension.
+
+```bash
+ssh -i path_to_public_key.pub user_name@server_ip
+```
+
+### Send file to remote host
+
+To send a file to a remote host using SSH. It is almost the same as the [connection](#connect-to-a-remote-host), but now you need to provide a valid path in the remote host, valid means that you have permissions and exists. `path_to_folder` can be, for example, `/home/user_name/Downloads`.
+
+```bash
+scp path_to/my_file.txt user_name@server_ip:path_to_folder
+```
+
+To send using a public key authentication is the same argument as the [connection](#connect-to-a-remote-host).
+
+```bash
+scp -i path_to/public_key.pub my_file.txt user_name@server_ip:path_to_folder
+```
+
+### Receive a file from remote host
+
+To receive a file from the remote host is just the [send](#send-file-to-remote-host) but inversed.
+
+```bash
+scp user_name@server_ip:path_to/file.txt path_to_save/my_file.txt
+```
+
+The same is valid for the public key authentication.
+
+```bash
+scp -i path_to/public_key.pub user_name@server_ip:path_to/file.txt path_to_save/my_file.txt
+```
+
+### ImageMagick
+
+#### Remove alpha channel
+
+Of course the image extension can change.
+
+```bash
+magick convert img.jpg -background white -alpha remove -alpha off new_image.jpg
+```
+
+#### Resize an image
+
+[More information about](http://www.imagemagick.org/Usage/resize/)
+
+This will resize the image to 64x64. But in fact the images were only enlarged or reduced just enough so as to best fit into the given size.
+
+```bash
+magick convert dragon.gif -resize 64x64 resize_dragon.gif
+```
+
+This will resize the image to 64x64 ignoring the aspect ratio.
+
+```bash
+magick convert dragon.gif -resize 64x64\! resize_dragon.gif
+```
+
+This will resize in a percentage, keeping the aspect ratio.
+
+```bash
+magick convert dragon.gif -resize 50%  half_dragon.gif
+```
+
+#### Batch
+
+Basically you use the operation that you want to do, but you use the command mogrify.
+
+Remove alpha channel in a batch:
+
+```bash
+magick mogrify -path tmp/ -background white -alpha remove -alpha off *.jpg
+```
+
+The first command will resize all images from the current folder to 100x100 set the jpg quality to 60% and convert the `.png` images to `jpg` and then save to `tmp/`
+
+The second will take all png files in your current directory, resize to 60% (of largest dimension and keep aspect ratio), set jpg quality to 60 and convert to jpg and then save to `tmp/`.
+
+```bash
+magick mogrify -path tmp/ -resize 100x100 -quality 60 -format jpg *.png
+
+magick mogrify -path tmp/ -resize 60x60% -quality 60 -format jpg *.png
+```
+
+## Linux
+
+Command lines for linux distribuitions.
+
+### Extract file
+
+This one is the most searched one (for me at least).
+
+#### Extract tar.gz
+
+You also can use this one [Extract tar.xz](#extract-tarxz).  
+
+Extract (and create) to a folder called `file_name`.
+
+```bash
+tar -xvzf file_name.tar.gz
+```
+
+Extract to a custom folder.
+
+```bash
+tar -xvzf file_name.tar.gz -C my_foler
+```
+
+- `f`: this must be the last flag of the command, and the tar file must be immediately after. It tells tar the name and path of the compressed file.
+- `z`: tells tar to decompress the archive using gzip
+- `x`: tar can collect files or extract them. `x` does the latter.
+- `v`: makes tar talk a lot. Verbose output shows you all the files being extracted.
+- `C`: means change to directory `DIR`. In our example, `DIR` is `my_foler`.
+
+#### Extract tar.xz
+
+This one should work for [Extract tar.gz](#extract-targz)
+
+```bash
+tar xf archive.tar.xz
+```
+
+#### Extract .zip
+
+The most simple one, but probably you need to install `unzip`. Don't worry usually it is pre-installed or in the package manager.
+
+This will extract to a folder named `file_name`.
+
+```bash
+unzip file_name.zip
+```
+
+This will extract to a folder named `my_folder`.
+
+```bash
+unzip file_name.zip -d my_folder
+```
+
+### Compress files
+
+Commands to compress files.
+
+#### Zip files and folders
+
+Probably you need to install `unzip`. Don't worry usually it is pre-installed or in the package manager.
+
+To compress an entire folder and its subfolders. In this case it'll compress `my_folder` to `file_name.zip`.
+
+```bash
+zip -r file_name.zip my_folder
+```
+
+For a single file just do that, it'll zip `my_file.txt` to `file_name.zip`. Of course it work for any extension not only `.txt`.
+
+```bash
+zip file_name.zip my_file.txt
+```
+
+### Pandoc like a boss
+
+Convert basically everything to PDF, merge pdf and all that good student shit.
+
+## Python
+
+Python related stuff.
+
+### Convert images to PDF
+
+[Use img2pdf](https://pypi.org/project/img2pdf/).
+
+```python
+import img2pdf
+
+img_list = ["a.png", "b.jpg", "x.jpg"]
+
+with open("out.pdf", "wb") as f:
+  f.write(img2pdf.convert(image_list))
+```
+
+### Lists
+
+Some list related stuff.
+
+#### List comprehension
+
+[From this answer](https://stackoverflow.com/a/45079294/10697552). The best explanation possible.
+
+![good shit](img/0GoV5.gif)
+
+#### Extend a list
+
+A.k.a. append the items from a list to another list.
+
+```python
+x = [1, 2, 3]
+x.extend([4, 5])
+
+print (x)
+```
+
+Will result in:
+
+```bash
+[1, 2, 3, 4, 5]
+```
+
+### Dictionaries
+
+#### Check if a key is in a dict
+
+An effient method. [As described here](https://stackoverflow.com/questions/1602934/check-if-a-given-key-already-exists-in-a-dictionary)
+
+```python
+d = {"x": 1, "y": 2}
+
+if "x" in d:
+  return d["x"]
+```
+
+### Tabulate
+
+Pretty useful to make tables in python print statements.
+
+Example:
+
+```python
+import numpy as np
+from tabulate import tabulate
+
+a = np.random.uniform(0, 10, 1000)
+b = np.random.normal(10, 5, 1000)
+
+print(tabulate([["A", a.min(), a.max(), a.mean(), a.std()],
+                ["B", b.min(), b.max(), b.mean(), b.std()]],
+                headers=["-", "MIN", "MAX", "MEAN", "STD_DEV"]))
+```
+
+### Pandas
+
+Commands for pandas dataframe
+
+#### Filter values
+
+Filtering a dataframe. [Here is a more complete guide](https://cmdlinetips.com/2018/02/how-to-subset-pandas-dataframe-based-on-values-of-a-column/), a.k.a. I stole some good shit from there.
+
+About the function [contains](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.contains.html)
+
+```python
+import pandas as pd
+
+def some_bool_expression(x):
+  return x < 10
+
+# using a function
+df = df[some_bool_expression(df["foo"])]
+
+# using a lambda expression
+df = df[lambda x: df["foo"] < 10]
+
+# just an expression
+df = df[df["foo"] < 10]
+df = df[df.foo < 10]
+
+# Filtering out null values
+df = df[df.foo.notnull()]
+
+# filtering using list
+df = df[df.foo.isin(["a", "b"])]
+
+# if not in the list
+df = df[~df.foo.isin(["a", "b"])]
+
+# using expressions
+df = df[df.foo.str.contains("regex")]
+```
+
+#### Select by [row, col] index
+
+For more information [Here](https://thispointer.com/select-rows-columns-by-name-or-index-in-dataframe-using-loc-iloc-python-pandas/)
+
+```python
+dataFrame.loc[<ROWS RANGE> , <COLUMNS RANGE>]
+
+# Select a single column by Index position
+dfObj.iloc[ : , 2 ]
+
+# Select multiple columns by Index range
+dfObj.iloc[: , [0, 2]]
+
+# Selecting a Single Column by Column Names
+columnsData = dfObj.loc[ : , 'Age' ]
+
+# Select only 2 columns from dataFrame and create a new subset DataFrame
+columnsData = dfObj.loc[ : , ['Age', 'Name'] ]
+
+# select single row
+rowData = dfObj.loc[ 'b' , : ]
+
+# Select multiple rows by Index labels
+rowData = dfObj.loc[ ['c' , 'b'] , : ]
+```
+
+#### Print interesting data
+
+Use [describe()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html) function.
+
+```python
+import pandas as pd
+
+print(a.describe()[["foo", "bar"]].transpose()[["mean", "min", "max"]])
+```
+
+#### Append a dataframe to another dataframe
+
+```python
+import pandas as pd
+a = pd.read_csv("some_file.csv")
+b = pd.DataFrame(data=some_data)
+
+# append returns a new dataframe
+a = a.append(b)
+```
+
+### Format float
+
+Below we have some samples of rounding a float number.
+
+```python
+a = 13.949999999999999
+
+print("Value of a: {0:.4f}".format(a))
+
+print("Value of a: %.2f" % a)
+
+print("Value of a: %.4f" % round(a, 4))
+```
+
+### JSON file operations
+
+#### Save to JSON file
+
+Saving data to json file.
+
+```python
+import json
+
+with open('data.json', 'w') as fp:
+  json.dump(data, fp)
+```
+
+#### Load from JSON file
+
+Load and read data from JSON file
+
+```python
+import json
+
+with open('data.json', 'r') as fp:
+    data = json.load(fp)
+```
+
+#### Append data to JSON
+
+It'll depend on the data that you have inside the file, let's say that it is a list of dictionaries.
+
+```python
+# The data will look like this
+
+data = [{
+    "date": "2020-01-01",
+    "message": "a message"
+  }, {
+    "date": "2019-12-31",
+    "message": "hello"
+  }]
+```
+
+```python
+import json
+
+with open('data.json', 'r+') as fp:
+    data = json.load(fp)
+    data.append({"date": "2018-11-15", "message": "append message"})
+    json.dump(data, fp)
+```
+
+### Matplotlib
+
+#### Setting numbers on the axis
+
+How to set specific numbers on the X/Y axis, e.g.: 0.5 in 0.5 increments.  
+[More info](https://stackoverflow.com/questions/21393802/python-matplotlib-how-to-specify-values-on-y-axis)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+def g(x):
+  return math.sin(x)
+
+fx = np.vectorize(g)
+
+x = np.linspace(-5,5, 1000)
+y = fx(x)
+
+# evenly spaced by 1
+plt.xticks(np.arange(x.min(), x.max() + 1, 1))
+
+# spaced by 0.5
+plt.yticks(np.arange(y.min(), y.max()+1, 0.5))
+
+plt.plot(x, y)
+plt.grid(axis='y', linestyle='-')
+plt.show()
+```
+
+#### Linewidth
+
+Set the linewidth
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+def f(x):
+  return 1/(1+math.e**(-x))
+
+fx = np.vectorize(f)
+x = np.linspace(-5,5, 1000)
+y = fx(x)
+
+plt.plot(x, y, linewidth=4)
+plt.show()
+```
+
+#### Remove top and right axis
+
+To just leave the x and y axis.  
+[Solution A](https://stackoverflow.com/questions/925024/how-can-i-remove-the-top-and-right-axis-in-matplotlib)  
+[Documentation](https://matplotlib.org/examples/ticks_and_spines/spines_demo.html)  
+[Solution B](https://stackoverflow.com/questions/21754697/positions-of-spines-in-matplotlib)
+
+```python
+ax = plt.subplot(111)
+ax.plot(x, y)
+
+# Hide the right and top spines
+ax.spines['right'].set_visible(False)
+ax.spines['top'].set_visible(False)
+```
+
+```python
+# Solution B
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['top'].set_visible(False)
+```
+
+### Date and time
+
+#### Get a list of months
+
+```python
+import datetime
+
+months = [(i, datetime.date(2008, i, 1).strftime("%B")) for i in range(1,13)]
+```
