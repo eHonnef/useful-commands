@@ -45,6 +45,11 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Setting numbers on the axis](#setting-numbers-on-the-axis)
       - [Linewidth](#linewidth)
       - [Remove top and right axis](#remove-top-and-right-axis)
+      - [Change font size](#change-font-size)
+      - [Legends](#legends)
+      - [Colors](#colors)
+        - [Color for each bar in a bar/histogram plot](#color-for-each-bar-in-a-barhistogram-plot)
+      - [Remove X or Y ticks](#remove-x-or-y-ticks)
     - [Date and time](#date-and-time)
       - [Get a list of months](#get-a-list-of-months)
 
@@ -272,7 +277,7 @@ Will result in:
 
 #### Check if a key is in a dict
 
-An effient method. [As described here](https://stackoverflow.com/questions/1602934/check-if-a-given-key-already-exists-in-a-dictionary)
+An effient method. [As described here](https://stackoverflow.com/a/1602964/10697552)
 
 ```python
 d = {"x": 1, "y": 2}
@@ -453,7 +458,7 @@ with open('data.json', 'r+') as fp:
 #### Setting numbers on the axis
 
 How to set specific numbers on the X/Y axis, e.g.: 0.5 in 0.5 increments.  
-[More info](https://stackoverflow.com/questions/21393802/python-matplotlib-how-to-specify-values-on-y-axis)
+[More info](https://stackoverflow.com/a/21394064/10697552)
 
 ```python
 import matplotlib.pyplot as plt
@@ -502,9 +507,9 @@ plt.show()
 #### Remove top and right axis
 
 To just leave the x and y axis.  
-[Solution A](https://stackoverflow.com/questions/925024/how-can-i-remove-the-top-and-right-axis-in-matplotlib)  
+[Solution A](https://stackoverflow.com/a/27361819/10697552)  
 [Documentation](https://matplotlib.org/examples/ticks_and_spines/spines_demo.html)  
-[Solution B](https://stackoverflow.com/questions/21754697/positions-of-spines-in-matplotlib)
+[Solution B](https://stackoverflow.com/a/21754884/10697552)
 
 ```python
 ax = plt.subplot(111)
@@ -519,6 +524,97 @@ ax.spines['top'].set_visible(False)
 # Solution B
 plt.gca().spines['right'].set_visible(False)
 plt.gca().spines['top'].set_visible(False)
+```
+
+#### Change font size
+
+Quick answer in the code, [longer version](https://stackoverflow.com/a/3900167/10697552)
+
+```python
+import matplotlib.pyplot as plt
+
+SMALL_SIZE = 8
+MEDIUM_SIZE = 10
+BIGGER_SIZE = 12
+
+plt.rc('font', size=SMALL_SIZE)          # controls default text sizes
+plt.rc('axes', titlesize=SMALL_SIZE)     # fontsize of the axes title
+plt.rc('axes', labelsize=MEDIUM_SIZE)    # fontsize of the x and y labels
+plt.rc('xtick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('ytick', labelsize=SMALL_SIZE)    # fontsize of the tick labels
+plt.rc('legend', fontsize=SMALL_SIZE)    # legend fontsize
+plt.rc('figure', titlesize=BIGGER_SIZE)  # fontsize of the figure title
+```
+
+#### Legends
+
+Quick answer below, [docs](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.legend.html)
+
+```python
+import matplotlib.pyplot as plt
+
+plt.plot(x, y, label="inline label")
+
+labels = ["a", "b", "c"] # must be the same size of the bars
+bar_plt = plt.bar(x, y)
+plt.legends(bar_plt, labels)
+```
+
+#### Colors
+
+This one have a whole subset.
+
+##### Color for each bar in a bar/histogram plot
+
+You can set for each individually.
+
+```python
+import matplotlib.pyplot as plt
+
+bar_plt = plt.bar(x, y)
+
+bar_plt[0].set_color("r") # of course you can arrange a loop
+```
+
+You can use a color map, [list of color maps](https://matplotlib.org/tutorials/colors/colormaps.html).
+
+[Stack overflow answer](https://stackoverflow.com/a/18903963/10697552)
+
+If you are using a dictionary that have a counter.
+
+```python
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from matplotlib.colors import Normalize
+
+d = {"a":10, "b":5, "c":19}
+
+lst = [i for i in range(len(d))] # this will map the keys to a number
+
+# option 1, if you choose a color map that has gradients
+jet_map = cm.get_cmap('jet')
+norm = Normalize(vmin=0, vmax=len(lst))
+bar_plt = plt.bar(d.keys(), d.values(), color=jet_map(norm(lst)))
+
+# option 2, if you choose a color map that is a qualitative
+q_map = cm.get_cmap('tab10')
+bar_plt = plt.bar(d.keys(), d.values(), color=q_map(lst))
+```
+
+#### Remove X or Y ticks
+
+Quick answer below, [longer version](https://stackoverflow.com/a/12998531/10697552)
+
+```python
+from matplotlib import pyplot as plt
+
+plt.plot(range(10))
+plt.tick_params(
+    axis='x',          # changes apply to the x-axis
+    which='both',      # both major and minor ticks are affected
+    bottom=False,      # ticks along the bottom edge are off
+    top=False,         # ticks along the top edge are off
+    labelbottom=False) # labels along the bottom edge are off
 ```
 
 ### Date and time
