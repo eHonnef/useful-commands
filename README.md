@@ -153,7 +153,7 @@ magick mogrify -path tmp/ -resize 60x60% -quality 60 -format jpg *.png
 
 ## Linux
 
-Command lines for linux distribuitions.
+Command lines for linux distributions.
 
 ### Extract file
 
@@ -277,7 +277,7 @@ Will result in:
 
 #### Check if a key is in a dict
 
-An effient method. [As described here](https://stackoverflow.com/a/1602964/10697552)
+An efficient method. [As described here](https://stackoverflow.com/a/1602964/10697552)
 
 ```python
 d = {"x": 1, "y": 2}
