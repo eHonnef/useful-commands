@@ -1,11 +1,11 @@
-# Useful list of commands for Linux and Windows and Python packages
+# Useful list of commands for Linux and Windows and Python packages and C++
 
 Just a bunch of commands stacked together to easily find it.  
 Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
 
 ## Table of content
 
-- [Useful list of commands for Linux and Windows and Python packages](#useful-list-of-commands-for-linux-and-windows-and-python-packages)
+- [Useful list of commands for Linux and Windows and Python packages and C++](#useful-list-of-commands-for-linux-and-windows-and-python-packages-and-c)
   - [Table of content](#table-of-content)
   - [SSH related commands](#ssh-related-commands)
     - [Connect to a remote host](#connect-to-a-remote-host)
@@ -52,6 +52,11 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Remove X or Y ticks](#remove-x-or-y-ticks)
     - [Date and time](#date-and-time)
       - [Get a list of months](#get-a-list-of-months)
+  - [C++](#c)
+    - [Iterators](#iterators)
+      - [Get the iterator index](#get-the-iterator-index)
+      - [Check if a value is inside a container](#check-if-a-value-is-inside-a-container)
+    - [Nice way to write a for loop](#nice-way-to-write-a-for-loop)
 
 ## SSH related commands
 
@@ -625,4 +630,63 @@ plt.tick_params(
 import datetime
 
 months = [(i, datetime.date(2008, i, 1).strftime("%B")) for i in range(1,13)]
+```
+
+## C++
+
+You know that this list will be gigantic when it just started as a "compilation of linux commands".
+
+### Iterators
+
+I'll just add this topic as a big one because there is a lot to remember here.
+
+#### Get the iterator index
+
+Accordingly to [this](https://stackoverflow.com/q/2152986/10697552), you have two options, consider `it` an iterator of `vec`.
+
+```c++
+int index = it - vec.begin();
+
+int index = std::distance(vec.begin(), it);
+```
+
+#### Check if a value is inside a container
+
+For `std::vector`:
+
+```c++
+auto found = std::find(vec.begin(), vec.end(), value);
+
+if (found != vec.end())
+  return true; // found (duh)
+else
+  return false; // not found (duh)
+```
+
+To check if a key is inside a `std::map`, you have 2 options:
+
+```c++
+if (my_map.count(key) > 0)
+  return true;
+```
+
+Or maybe you want to save the iterator for later.
+
+```c++
+auto found = my_map.find(key);
+
+if (found == my_map.end())
+  return false; // not found
+
+return true; // found, or do something else with found
+```
+
+### Nice way to write a for loop
+
+Shortest and cool (I think) way to write a reverse `for loop`:
+
+```c++
+// consider something.size() the size of the array/vector/list/etc
+for (auto i = something.size(); i-->0;)
+  // do something
 ```
