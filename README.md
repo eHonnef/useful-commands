@@ -57,6 +57,9 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Get the iterator index](#get-the-iterator-index)
       - [Check if a value is inside a container](#check-if-a-value-is-inside-a-container)
     - [Nice way to write a for loop](#nice-way-to-write-a-for-loop)
+  - [Spreadsheets](#spreadsheets)
+    - [Google sheets](#google-sheets)
+    - [How to merge two tables and sum its content](#how-to-merge-two-tables-and-sum-its-content)
 
 ## SSH related commands
 
@@ -690,3 +693,15 @@ Shortest and cool (I think) way to write a reverse `for loop`:
 for (auto i = something.size(); i-->0;)
   // do something
 ```
+
+## Spreadsheets
+
+Commands related to spreadsheets (google, excel or calc).
+
+### Google sheets
+
+About google sheets
+
+### How to merge two tables and sum its content
+
+Quite useful if you have a scoreboard of somekind. [Link](https://infoinspired.com/google-docs/spreadsheet/merge-two-tables-in-google-sheets/).
