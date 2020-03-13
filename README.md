@@ -59,7 +59,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Nice way to write a for loop](#nice-way-to-write-a-for-loop)
   - [Spreadsheets](#spreadsheets)
     - [Google sheets](#google-sheets)
-    - [How to merge two tables and sum its content](#how-to-merge-two-tables-and-sum-its-content)
+      - [How to merge two tables and sum its content](#how-to-merge-two-tables-and-sum-its-content)
 
 ## SSH related commands
 
@@ -702,6 +702,6 @@ Commands related to spreadsheets (google, excel or calc).
 
 About google sheets
 
-### How to merge two tables and sum its content
+#### How to merge two tables and sum its content
 
 Quite useful if you have a scoreboard of somekind. [Link](https://infoinspired.com/google-docs/spreadsheet/merge-two-tables-in-google-sheets/).
