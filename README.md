@@ -50,6 +50,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Colors](#colors)
         - [Color for each bar in a bar/histogram plot](#color-for-each-bar-in-a-barhistogram-plot)
       - [Remove X or Y ticks](#remove-x-or-y-ticks)
+      - [Create a custom histogram](#create-a-custom-histogram)
     - [Date and time](#date-and-time)
       - [Get a list of months](#get-a-list-of-months)
   - [C++](#c)
@@ -623,6 +624,32 @@ plt.tick_params(
     bottom=False,      # ticks along the bottom edge are off
     top=False,         # ticks along the top edge are off
     labelbottom=False) # labels along the bottom edge are off
+```
+
+#### Create a custom histogram
+
+Sometimes you just want a histogram that have custom bins, for example the [NPS score board](https://www.netpromoter.com/know/).
+
+```python
+import matplotlib.pyplot as plt
+import collections as col
+
+df = pd.read_csv("./NPS.csv") # just to illustrate
+
+hist = col.Counter()
+
+# here go your "bin" width or logic for each value
+for score in df["Scores"]:
+  if sc <= 6:
+    hist["Detractors"] += 1
+  elif sc <= 8:
+    hist["Neutral"] += 1
+  elif sc <= 10:
+    hist["Promoters"] += 1
+
+# give a nice color if you want (there is a topic about colors around here)
+bar_plt = plt.bar(hist.keys(), hist.values(), color=["g", "r", "y"])
+plt.show()
 ```
 
 ### Date and time
