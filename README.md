@@ -42,7 +42,10 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Load from JSON file](#load-from-json-file)
       - [Append data to JSON](#append-data-to-json)
     - [Matplotlib](#matplotlib)
-      - [Setting numbers on the axis](#setting-numbers-on-the-axis)
+      - [Setting custom labels on the axis (xticks or yticks)](#setting-custom-labels-on-the-axis-xticks-or-yticks)
+        - [Using subplots](#using-subplots)
+        - [Without subplots](#without-subplots)
+      - [Setting numbers on the axis (xticks or yticks)](#setting-numbers-on-the-axis-xticks-or-yticks)
       - [Linewidth](#linewidth)
       - [Remove top and right axis](#remove-top-and-right-axis)
       - [Change font size](#change-font-size)
@@ -464,7 +467,58 @@ with open('data.json', 'r+') as fp:
 
 ### Matplotlib
 
-#### Setting numbers on the axis
+#### Setting custom labels on the axis (xticks or yticks)
+
+##### Using subplots
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig, ax = plt.subplots(1)
+
+labels = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+
+x = np.linspace(0, 10, num=10)
+y = np.linspace(0,10, num=10)
+
+ax.plot(x, y)
+
+ax.set_xlim(min(x), max(x))
+ax.set_ylim(min(y), max(y))
+
+ax.set_xticks(range(len(labels)))
+ax.set_yticks(range(len(labels)))
+
+ax.set_xticklabels(labels)
+ax.set_yticklabels(labels)
+
+fig.show()
+```
+
+##### Without subplots
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+labels = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+
+x = np.linspace(0, 10, num=10)
+y = np.linspace(0,10, num=10)
+
+plt.plot(x, y)
+
+plt.xlim(min(x), max(x))
+plt.ylim(min(y), max(y))
+
+plt.xticks(range(len(labels)), labels=labels)
+plt.yticks(range(len(labels)), labels=labels)
+
+plt.show()
+```
+
+#### Setting numbers on the axis (xticks or yticks)
 
 How to set specific numbers on the X/Y axis, e.g.: 0.5 in 0.5 increments.  
 [More info](https://stackoverflow.com/a/21394064/10697552)
