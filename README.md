@@ -257,6 +257,7 @@ Enable a repository:
 dnf config-manager --set-enabled PowerTools
 ```
 
+[More about on why there isn't the SDL2 packages](https://forums.centos.org/viewtopic.php?t=72010)  
 Install the following packages:
 
 ```bash
