@@ -23,6 +23,8 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Compress files](#compress-files)
       - [Zip files and folders](#zip-files-and-folders)
     - [Pandoc like a boss](#pandoc-like-a-boss)
+    - [CentOS](#centos)
+      - [Install steamcmd (and avoid errors)](#install-steamcmd-and-avoid-errors)
   - [Python](#python)
     - [Convert images to PDF](#convert-images-to-pdf)
     - [Lists](#lists)
@@ -240,6 +242,36 @@ zip file_name.zip my_file.txt
 ### Pandoc like a boss
 
 Convert basically everything to PDF, merge pdf and all that good student shit.
+
+### CentOS
+
+Commands related with CentOS.
+
+#### Install steamcmd (and avoid errors)
+
+Install as described [here](https://developer.valvesoftware.com/wiki/SteamCMD#Manually).
+
+Enable a repository:
+
+```bash
+dnf config-manager --set-enabled PowerTools
+```
+
+Install the following packages:
+
+```bash
+yum -y install SDL
+yum -y install SDL.i686
+dnf install SDL2
+dnf install SDL2.i686
+```
+
+Link this fucker:
+
+```bash
+mkdir ~/.steam/sdk32
+ln -s Steam/linux32/steamclient.so ~/.steam/sdk32/
+```
 
 ## Python
 
