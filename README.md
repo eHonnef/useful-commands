@@ -16,6 +16,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Resize an image](#resize-an-image)
       - [Batch](#batch)
   - [Linux](#linux)
+    - [TMUX](#tmux)
     - [Extract file](#extract-file)
       - [Extract tar.gz](#extract-targz)
       - [Extract tar.xz](#extract-tarxz)
@@ -25,6 +26,8 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Pandoc like a boss](#pandoc-like-a-boss)
     - [CentOS](#centos)
       - [Install steamcmd (and avoid errors)](#install-steamcmd-and-avoid-errors)
+  - [Windows](#windows)
+    - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
     - [Convert images to PDF](#convert-images-to-pdf)
     - [Lists](#lists)
@@ -169,6 +172,10 @@ magick mogrify -path tmp/ -resize 60x60% -quality 60 -format jpg *.png
 
 Command lines for linux distributions.
 
+### TMUX
+
+[TMUX cheat sheet.](https://tmuxcheatsheet.com/)
+
 ### Extract file
 
 This one is the most searched one (for me at least).
@@ -273,6 +280,27 @@ Link this fucker:
 mkdir ~/.steam/sdk32
 ln -s Steam/linux32/steamclient.so ~/.steam/sdk32/
 ```
+
+## Windows
+
+Windows related sttuff.
+
+### How to force a program to not run as Admin
+
+This is a way to force a program to run without administrator privileges or UAC.
+
+```powershell
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\*\shell\forcerunasinvoker]
+@="Run without privilege elevation"
+
+[HKEY_CLASSES_ROOT\*\shell\forcerunasinvoker\command]
+@="cmd /min /C \"set __COMPAT_LAYER=RUNASINVOKER && start \"\" \"%1\"\""
+```
+
+Save this text in `name_of_file.reg` and add it to the Windows Registry. (Double-clicking on it should do the trick.)  
+Afterwards, right-click the app you'd like to run without administrative privileges and select "Run without privilege elevation".  
 
 ## Python
 
