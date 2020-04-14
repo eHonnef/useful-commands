@@ -26,6 +26,9 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Pandoc like a boss](#pandoc-like-a-boss)
     - [CentOS](#centos)
       - [Install steamcmd (and avoid errors)](#install-steamcmd-and-avoid-errors)
+      - [Open ports](#open-ports)
+        - [Open a specific port](#open-a-specific-port)
+        - [List opened ports](#list-opened-ports)
   - [Windows](#windows)
     - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
@@ -279,6 +282,26 @@ Link this fucker:
 ```bash
 mkdir ~/.steam/sdk32
 ln -s Steam/linux32/steamclient.so ~/.steam/sdk32/
+```
+
+#### Open ports
+
+[Website with solution](https://www.rootusers.com/how-to-open-a-port-in-centos-7-with-firewalld/)
+
+##### Open a specific port
+
+```bash
+firewall-cmd --permanent --add-port=7812358712/tcp
+```
+
+```bash
+firewall-cmd --reload
+```
+
+##### List opened ports
+
+```bash
+firewall-cmd --list-ports
 ```
 
 ## Windows
