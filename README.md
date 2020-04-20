@@ -9,6 +9,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Table of content](#table-of-content)
   - [SSH related commands](#ssh-related-commands)
     - [Connect to a remote host](#connect-to-a-remote-host)
+    - [Configuration file](#configuration-file)
     - [Send file to remote host](#send-file-to-remote-host)
     - [Receive a file from remote host](#receive-a-file-from-remote-host)
     - [ImageMagick](#imagemagick)
@@ -91,6 +92,19 @@ If you use the fancy shit like a SSH public key authentication, use the `-i` arg
 ssh -i path_to_public_key.pub user_name@server_ip
 ```
 
+### Configuration file
+
+You can setup a configuration file that have almost everything necessary to connect to a remote server, it is specially useful to use with vscode. [Here is the link for the full set of configurations](https://www.ssh.com/ssh/config/).
+
+And here is a basic setup. Save as `config` in your `~/.ssh` folder.
+
+```bash
+Host a_name_for_this_setting
+  HostName your_host_address_or_ip
+  User your_username
+  IdentityFile path_to_rsa_key_its_optional
+```
+
 ### Send file to remote host
 
 To send a file to a remote host using SSH. It is almost the same as the [connection](#connect-to-a-remote-host), but now you need to provide a valid path in the remote host, valid means that you have permissions and exists. `path_to_folder` can be, for example, `/home/user_name/Downloads`.
@@ -118,6 +132,7 @@ The same is valid for the public key authentication.
 ```bash
 scp -i path_to/public_key.pub user_name@server_ip:path_to/file.txt path_to_save/my_file.txt
 ```
+
 
 ### ImageMagick
 
