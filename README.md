@@ -18,6 +18,9 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Batch](#batch)
   - [Linux](#linux)
     - [TMUX](#tmux)
+      - [Detach](#detach)
+    - [Attach/new terminal](#attachnew-terminal)
+    - [Re-attach last session](#re-attach-last-session)
     - [Extract file](#extract-file)
       - [Extract tar.gz](#extract-targz)
       - [Extract tar.xz](#extract-tarxz)
@@ -193,6 +196,22 @@ Command lines for linux distributions.
 ### TMUX
 
 [TMUX cheat sheet.](https://tmuxcheatsheet.com/)
+
+#### Detach
+
+Exit a window without quitting the terminal program.
+
+`Ctrl` + `b` `d`
+
+### Attach/new terminal
+
+`Ctrl` + `b` `c`
+
+### Re-attach last session
+
+```bash
+tmux a
+```
 
 ### Extract file
 
