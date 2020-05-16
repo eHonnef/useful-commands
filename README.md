@@ -40,6 +40,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Lists](#lists)
       - [List comprehension](#list-comprehension)
       - [Extend a list](#extend-a-list)
+      - [Index a list using a list](#index-a-list-using-a-list)
     - [Dictionaries](#dictionaries)
       - [Check if a key is in a dict](#check-if-a-key-is-in-a-dict)
     - [Tabulate](#tabulate)
@@ -401,6 +402,34 @@ Will result in:
 
 ```bash
 [1, 2, 3, 4, 5]
+```
+
+#### Index a list using a list
+
+You have a list of something and you want to index some elements from that list using a list.
+
+```python
+lst = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+indexes = [0, 3, 7]
+```
+
+You can use numpy
+
+```python
+import numpy as np
+
+lst = np.array(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'])
+indexes = [0, 3, 7]
+result = lst[indexes]
+```
+
+Or list comprehension
+
+```python
+lst = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+indexes = [0, 3, 7]
+
+result = [lst[i] for i in indexes]
 ```
 
 ### Dictionaries
