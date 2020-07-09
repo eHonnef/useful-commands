@@ -36,14 +36,19 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Windows](#windows)
     - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
+    - [Read file lines:](#read-file-lines)
     - [Convert images to PDF](#convert-images-to-pdf)
     - [Lists](#lists)
       - [List comprehension](#list-comprehension)
       - [Extend a list](#extend-a-list)
       - [Index a list using a list](#index-a-list-using-a-list)
+      - [Choose a random list from a list of lists](#choose-a-random-list-from-a-list-of-lists)
     - [Dictionaries](#dictionaries)
       - [Check if a key is in a dict](#check-if-a-key-is-in-a-dict)
     - [Tabulate](#tabulate)
+    - [System related commands](#system-related-commands)
+      - [List all immediate subdirectories](#list-all-immediate-subdirectories)
+      - [List all subdirectories recursively](#list-all-subdirectories-recursively)
     - [Pandas](#pandas)
       - [Filter values](#filter-values)
       - [Select by [row, col] index](#select-by-row-col-index)
@@ -364,6 +369,19 @@ Afterwards, right-click the app you'd like to run without administrative privile
 
 Python related stuff.
 
+### Read file lines:
+
+```python
+with open(filename) as f:
+  for line in f.readlines():
+    print(line)
+
+# or
+
+for line in open(filename):
+  print(line)
+```
+
 ### Convert images to PDF
 
 [Use img2pdf](https://pypi.org/project/img2pdf/).
@@ -432,6 +450,19 @@ indexes = [0, 3, 7]
 result = [lst[i] for i in indexes]
 ```
 
+#### Choose a random list from a list of lists
+
+Since `np.random.choice` can only choose from an 1-d array, [here's the solution](https://github.com/numpy/numpy/issues/10835#issuecomment-567233634).
+
+```python
+import numpy as np
+
+rng = np.random.default_rng()
+points = rng.random((10,2))
+
+rng.choice(points)
+```
+
 ### Dictionaries
 
 #### Check if a key is in a dict
@@ -461,6 +492,30 @@ b = np.random.normal(10, 5, 1000)
 print(tabulate([["A", a.min(), a.max(), a.mean(), a.std()],
                 ["B", b.min(), b.max(), b.mean(), b.std()]],
                 headers=["-", "MIN", "MAX", "MEAN", "STD_DEV"]))
+```
+
+### System related commands
+
+Commands that are related to the operating system, such as, list directories, files, create dir, remove, etc.
+
+#### List all immediate subdirectories
+
+[Link to the solution](https://stackoverflow.com/a/59938961/10697552)
+
+```python
+import os
+
+subdirs = [f.path for f in os.scandir(parent_folder_path) if f.is_dir()]
+```
+
+#### List all subdirectories recursively
+
+[Link to the solution](https://stackoverflow.com/a/973488/10697552)
+
+```python
+import os
+
+subdirs = [f[0] for f in os.walk(directory)]
 ```
 
 ### Pandas
@@ -814,6 +869,8 @@ bar_plt = plt.bar(d.keys(), d.values(), color=q_map(lst))
 #### Remove X or Y ticks
 
 Quick answer below, [longer version](https://stackoverflow.com/a/12998531/10697552)
+
+If you are using the subplots, [and also, here is the doc.](https://matplotlib.org/3.2.1/api/_as_gen/matplotlib.axes.Axes.tick_params.html)
 
 ```python
 from matplotlib import pyplot as plt
