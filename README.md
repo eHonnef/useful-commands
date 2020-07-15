@@ -36,6 +36,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Windows](#windows)
     - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
+    - [Inserting the same value multiple times when formatting a string](#inserting-the-same-value-multiple-times-when-formatting-a-string)
     - [Read file lines:](#read-file-lines)
     - [Convert images to PDF](#convert-images-to-pdf)
     - [Lists](#lists)
@@ -74,6 +75,9 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Create a custom histogram](#create-a-custom-histogram)
     - [Date and time](#date-and-time)
       - [Get a list of months](#get-a-list-of-months)
+    - [Psycopg2 and postgresql python module](#psycopg2-and-postgresql-python-module)
+      - [Using the same variable multiple times in a SQL query](#using-the-same-variable-multiple-times-in-a-sql-query)
+      - [Remove the quotes from a string for SQL query](#remove-the-quotes-from-a-string-for-sql-query)
   - [C++](#c)
     - [Iterators](#iterators)
       - [Get the iterator index](#get-the-iterator-index)
@@ -368,6 +372,20 @@ Afterwards, right-click the app you'd like to run without administrative privile
 ## Python
 
 Python related stuff.
+
+### Inserting the same value multiple times when formatting a string
+
+[Stack overflow](https://stackoverflow.com/a/1225656/10697552)
+
+```python
+incoming = 'arbit'
+result = '{0} hello world {0} hello world {0}'.format(incoming)
+```
+
+```python
+incoming = 'arbit'
+result = '{st} hello world {st} hello world {st}'.format(st=incoming)
+```
 
 ### Read file lines:
 
@@ -918,6 +936,41 @@ plt.show()
 import datetime
 
 months = [(i, datetime.date(2008, i, 1).strftime("%B")) for i in range(1,13)]
+```
+
+### Psycopg2 and postgresql python module
+
+Things about postgres (pg) and Psycopg2.
+
+#### Using the same variable multiple times in a SQL query
+
+From the [docs](http://initd.org/psycopg/docs/usage.html#passing-parameters-to-sql-queries)
+
+```python
+cur.execute(
+    """INSERT INTO some_table (an_int, a_date, another_date, a_string)
+        VALUES (%(int)s, %(date)s, %(date)s, %(str)s);""",
+    {'int': 10, 'str': "O'Reilly", 'date': datetime.date(2005, 11, 18)})
+```
+
+So, for the same variable
+
+```python
+cur.execute(
+    """INSERT INTO some_table (an_int, a_date, another_date, a_string)
+        VALUES (%(name)s, %(name)s, %(name)s, %(name)s);""",
+    {'name': "batata"})
+```
+
+#### Remove the quotes from a string for SQL query
+
+[Stack overflow](https://stackoverflow.com/a/43879809/10697552) and merge with the solution at [Inserting the same value multiple times when formatting a string](#inserting-the-same-value-multiple-times-when-formatting-a-string)
+
+```python
+from psycopg2 import sql
+...
+
+cur.execute(sql.SQL('INSERT INTO {} VALUES(...)').format(sql.Identifier(database_name)))
 ```
 
 ## C++
