@@ -973,6 +973,16 @@ from psycopg2 import sql
 cur.execute(sql.SQL('INSERT INTO {} VALUES(...)').format(sql.Identifier(database_name)))
 ```
 
+#### Insert if value doesn't exists
+
+Use [ON CONFLICT](https://www.postgresql.org/docs/9.5/sql-insert.html) clause.
+
+```sql
+INSERT INTO table (foo, bar) 
+VALUES ('value for foo', 'value for bar')
+ON CONFLICT (foo) do nothing
+```
+
 ## C++
 
 You know that this list will be gigantic when it just started as a "compilation of linux commands".
