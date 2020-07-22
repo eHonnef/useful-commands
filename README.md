@@ -394,7 +394,7 @@ l_rot = 13 % len(s)
 r_rot = 10 % len(s)
 
 amm = (l_rot - r_rot)
-r = s[amm:] +s [:amm]
+r = s[amm:] + s[:amm]
 ```
 
 ### Inserting the same value multiple times when formatting a string
