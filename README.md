@@ -383,7 +383,18 @@ l_rot = 13 % len(s)
 r_rot = 10 % len(s)
 
 l = s[l_rot:] + s[:l_rot] # left rotation
-r = c[-r_rot:] + c[:-r_rot] # right rotation
+r = l[-r_rot:] + l[:-r_rot] # right rotation
+```
+
+Or
+
+```python
+s = "abcd"
+l_rot = 13 % len(s)
+r_rot = 10 % len(s)
+
+amm = (l_rot - r_rot)
+r = s[amm:] +s [:amm]
 ```
 
 ### Inserting the same value multiple times when formatting a string
