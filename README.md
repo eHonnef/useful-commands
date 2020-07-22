@@ -36,6 +36,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Windows](#windows)
     - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
+    - [Rotating chars of a string to the left or right](#rotating-chars-of-a-string-to-the-left-or-right)
     - [Inserting the same value multiple times when formatting a string](#inserting-the-same-value-multiple-times-when-formatting-a-string)
     - [Read file lines:](#read-file-lines)
     - [Convert images to PDF](#convert-images-to-pdf)
@@ -78,6 +79,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Psycopg2 and postgresql python module](#psycopg2-and-postgresql-python-module)
       - [Using the same variable multiple times in a SQL query](#using-the-same-variable-multiple-times-in-a-sql-query)
       - [Remove the quotes from a string for SQL query](#remove-the-quotes-from-a-string-for-sql-query)
+      - [Insert if value doesn't exists](#insert-if-value-doesnt-exists)
   - [C++](#c)
     - [Iterators](#iterators)
       - [Get the iterator index](#get-the-iterator-index)
@@ -372,6 +374,17 @@ Afterwards, right-click the app you'd like to run without administrative privile
 ## Python
 
 Python related stuff.
+
+### Rotating chars of a string to the left or right
+
+```python
+s = "abcd"
+l_rot = 13 % len(s)
+r_rot = 10 % len(s)
+
+l = s[l_rot:] + s[:l_rot] # left rotation
+r = c[-r_rot:] + c[:-r_rot] # right rotation
+```
 
 ### Inserting the same value multiple times when formatting a string
 
