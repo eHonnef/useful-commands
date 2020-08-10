@@ -76,6 +76,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Create a custom histogram](#create-a-custom-histogram)
     - [Date and time](#date-and-time)
       - [Get a list of months](#get-a-list-of-months)
+      - [Random date](#random-date)
     - [Psycopg2 and postgresql python module](#psycopg2-and-postgresql-python-module)
       - [Using the same variable multiple times in a SQL query](#using-the-same-variable-multiple-times-in-a-sql-query)
       - [Remove the quotes from a string for SQL query](#remove-the-quotes-from-a-string-for-sql-query)
@@ -960,6 +961,32 @@ plt.show()
 import datetime
 
 months = [(i, datetime.date(2008, i, 1).strftime("%B")) for i in range(1,13)]
+```
+
+#### Random date
+
+Generate a random date.
+
+```python
+import time
+
+def random_date(start="1990-01-01", end=None):
+  """
+  Returns a random date between [start, end] in the format of %Y-%m-%d.
+  start and end needs to be in the same format.
+  If end is None then it'll use the current date.
+  """
+  start = [int(x) for x in start.split("-")]
+  start = time.mktime((start[0], start[1], start[2], 0, 0, 0, 0, 0, 0))
+
+  if end != None:
+    end = [int(x) for x in end.split("-")]
+    end = int(time.mktime((end[0], end[1], end[2], 0, 0, 0, 0, 0, 0)))
+  else:
+    end = int(time.time())
+
+  d = random.randint(start, end)
+  return datetime.date.fromtimestamp(d).strftime("%Y-%m-%d")
 ```
 
 ### Psycopg2 and postgresql python module
