@@ -149,6 +149,13 @@ The same is valid for the public key authentication.
 scp -i path_to/public_key.pub user_name@server_ip:path_to/file.txt path_to_save/my_file.txt
 ```
 
+### Create a public key using an existing private key
+
+[More details](https://blog.tinned-software.net/generate-public-ssh-key-from-private-ssh-key/)
+
+```bash
+ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+```
 
 ### ImageMagick
 
