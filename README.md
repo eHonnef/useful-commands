@@ -12,6 +12,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [Configuration file](#configuration-file)
     - [Send file to remote host](#send-file-to-remote-host)
     - [Receive a file from remote host](#receive-a-file-from-remote-host)
+    - [Create a public key using an existing private key](#create-a-public-key-using-an-existing-private-key)
     - [ImageMagick](#imagemagick)
       - [Remove alpha channel](#remove-alpha-channel)
       - [Resize an image](#resize-an-image)
@@ -46,6 +47,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
       - [Index a list using a list](#index-a-list-using-a-list)
       - [Choose a random list from a list of lists](#choose-a-random-list-from-a-list-of-lists)
     - [Dictionaries](#dictionaries)
+      - [Sort a dictionary based on a value inside](#sort-a-dictionary-based-on-a-value-inside)
       - [Check if a key is in a dict](#check-if-a-key-is-in-a-dict)
     - [Tabulate](#tabulate)
     - [System related commands](#system-related-commands)
@@ -514,6 +516,18 @@ rng.choice(points)
 ```
 
 ### Dictionaries
+
+#### Sort a dictionary based on a value inside
+
+```python
+result = {
+  "item1": {"Avg":1, "Min":1, "Max":2, "n":2},
+  "item2": {"Avg":1, "Min":1, "Max":2, "n":2},
+  "item3": {"Avg":1, "Min":1, "Max":2, "n":2}
+}
+
+sort = sorted(result.items(), key=lambda x: x[1]["Avg"], reverse=True)
+```
 
 #### Check if a key is in a dict
 
