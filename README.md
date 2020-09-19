@@ -37,6 +37,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Windows](#windows)
     - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
+    - [Auto generating the requirements.txt file](#auto-generating-the-requirementstxt-file)
     - [Rotating chars of a string to the left or right](#rotating-chars-of-a-string-to-the-left-or-right)
     - [Inserting the same value multiple times when formatting a string](#inserting-the-same-value-multiple-times-when-formatting-a-string)
     - [Read file lines:](#read-file-lines)
@@ -384,6 +385,16 @@ Afterwards, right-click the app you'd like to run without administrative privile
 ## Python
 
 Python related stuff.
+
+### Auto generating the requirements.txt file
+
+[This link](https://stackoverflow.com/a/31684470/10697552).
+
+```bash
+pip install pipreqs
+
+pipreqs /path/to/project
+```
 
 ### Rotating chars of a string to the left or right
 
