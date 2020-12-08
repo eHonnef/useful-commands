@@ -54,6 +54,10 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
     - [System related commands](#system-related-commands)
       - [List all immediate subdirectories](#list-all-immediate-subdirectories)
       - [List all subdirectories recursively](#list-all-subdirectories-recursively)
+      - [List all files only](#list-all-files-only)
+      - [Move files](#move-files)
+      - [Check if a directory exists](#check-if-a-directory-exists)
+      - [Create new directory](#create-new-directory)
     - [Pandas](#pandas)
       - [Filter values](#filter-values)
       - [Select by [row, col] index](#select-by-row-col-index)
@@ -591,6 +595,45 @@ subdirs = [f.path for f in os.scandir(parent_folder_path) if f.is_dir()]
 import os
 
 subdirs = [f[0] for f in os.walk(directory)]
+```
+
+#### List all files only
+
+```python
+import os
+
+subdirs = [f.path for f in os.scandir(folder) if not f.is_dir()]
+```
+
+#### Move files
+
+[Link to the solution](https://stackoverflow.com/a/41827240)
+
+```python
+import shutil
+import os
+
+source_file = '/path/to/source_folder/file.txt'
+target_dir = '/path/to/dest_folder'
+
+for file_name in file_names:
+  shutil.move(source_file, target_dir)
+```
+
+#### Check if a directory exists
+
+```python
+import os
+
+os.path.exists(direcotry_path)
+```
+
+#### Create new directory
+
+```python
+import os
+
+os.makedirs(newdir)
 ```
 
 ### Pandas
