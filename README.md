@@ -96,6 +96,8 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Spreadsheets](#spreadsheets)
     - [Google sheets](#google-sheets)
       - [How to merge two tables and sum its content](#how-to-merge-two-tables-and-sum-its-content)
+    - [Excel](#excel)
+      - [Format numbers using [K, M, G]](#format-numbers-using-k-m-g)
 
 ## SSH related commands
 
@@ -1170,7 +1172,7 @@ for (auto i = something.size(); i-->0;)
 
 ## Spreadsheets
 
-Commands related to spreadsheets (google, excel or calc).
+Commands related to spreadsheets (google, excel or calc). Probably one can be used in another, e.g.: an Excel command can be used in google sheets.
 
 ### Google sheets
 
@@ -1179,3 +1181,23 @@ About google sheets
 #### How to merge two tables and sum its content
 
 Quite useful if you have a scoreboard of somekind. [Link](https://infoinspired.com/google-docs/spreadsheet/merge-two-tables-in-google-sheets/).
+
+### Excel
+
+About Excel.
+
+#### Format numbers using [K, M, G]
+
+To format numbers using the kilo [K], mega [M], giga [G], etc.
+
+Format -> Custom format
+
+```excel
+[>=1000000]#,##0,,"M";[>=1000]#,##0,"K";0
+```
+
+To append more units just use the same principle and append the formats with the semicolon. The first condition that evaluates to TRUE will win and the format will be applied. For example:
+
+```excel
+[>=1000000]#,##0,,"M";
+```
