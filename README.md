@@ -37,6 +37,7 @@ Some good tips and tricks [HERE](https://cmdlinetips.com/category/linux-tips/)
   - [Windows](#windows)
     - [How to force a program to not run as Admin](#how-to-force-a-program-to-not-run-as-admin)
   - [Python](#python)
+    - [Generating a standalone python script (AKA exe file)](#generating-a-standalone-python-script-aka-exe-file)
     - [Auto generating the requirements.txt file](#auto-generating-the-requirementstxt-file)
     - [Rotating chars of a string to the left or right](#rotating-chars-of-a-string-to-the-left-or-right)
     - [Inserting the same value multiple times when formatting a string](#inserting-the-same-value-multiple-times-when-formatting-a-string)
@@ -391,6 +392,20 @@ Afterwards, right-click the app you'd like to run without administrative privile
 ## Python
 
 Python related stuff.
+
+### Generating a standalone python script (AKA exe file)
+
+[Complete answer](https://stackoverflow.com/a/12059644)
+
+Short version:
+
+```bash
+# Install PyInstaller
+pip install pyinstaller
+
+# Create the exe file (Single file mode)
+pyinstaller yourprogram.py -F
+```
 
 ### Auto generating the requirements.txt file
 
